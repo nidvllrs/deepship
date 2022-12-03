@@ -55,11 +55,11 @@ def CheckType(BoatType, *args):
         print('null')
         # xFastFT(fileNum, BoatTypeList)
 
-def FastFTplot(fileNum, boatTypeList, log=False):
+def FastFTplot(listIndex, boatTypeList, log=False):
     '''
     using scipy to do fourier transform video used: Fast Fourier Transform (FFT) analysis on wav file using python by Metallicode מטאליקוד
     '''
-    s_rate, signal = wavfile.read(boatTypeList[fileNum])
+    s_rate, signal = wavfile.read(boatTypeList[listIndex])
     FFT = abs(scipy.fft.fft(signal)) # fast fourier transform 
     freqVec = fftpk.fftfreq(len(FFT), (1.0/s_rate))
     if log:
@@ -70,7 +70,7 @@ def FastFTplot(fileNum, boatTypeList, log=False):
     plt.plot(freqVec[range(int(len(FFT)/2))], FFT[range(int(len(FFT)/2))])
     plt.xlabel('Frequency (Hz)')
     plt.ylabel('Amplitude')
-    plt.title(f'This is a FFT of {boatTypeList[fileNum]}')
+    plt.title(f'This is a FFT of {boatTypeList[listIndex]}')
     plt.show() 
 
 FastFTplot(0, CargoFileList)
