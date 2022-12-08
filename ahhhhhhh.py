@@ -99,19 +99,58 @@ def allPlots(boatNum,boatType):
     
 
 # =============================================================================
-# allPlots(38,"Cargo")
+# allPlots(27,"Cargo")
 # =============================================================================
 
 def stats(boatType,boatTypeList):
-    for boatNum in cargoList:
+    for boatNum in cargoList: # CHANGE THIS
         samplerate, data = wavfile.read(f'Project_2/{boatType}/{boatNum}.wav')
         kurt = scipy.stats.kurtosis(data)
         cv = np.std(data)/np.mean(data)
         print(f"{kurt} {cv}")
 
-stats("Cargo")
+# =============================================================================
+# stats("Cargo")
+# =============================================================================
 
+cargoSampleRate = []
+cargoData = []
+for boatNum in cargoList:
+    samplerate, data = wavfile.read(f'Project_2/Cargo/{boatNum}.wav')
+    cargoSampleRate.append(samplerate)
+    cargoData.append(data)
 
+passengerSampleRate = []
+passengerData = []
+for boatNum in passengerList:
+    samplerate, data = wavfile.read(f'Project_2/Passengership/{boatNum}.wav')
+    passengerSampleRate.append(samplerate)
+    passengerData.append(data)
+    
+tankerSampleRate = []
+tankerData = []
+for boatNum in tankerList:
+    samplerate, data = wavfile.read(f'Project_2/Tanker/{boatNum}.wav')
+    tankerSampleRate.append(samplerate)
+    tankerData.append(data)
+    
+tugSampleRate = []
+tugData = []
+for boatNum in tugList:
+    samplerate, data = wavfile.read(f'Project_2/Tug/{boatNum}.wav')
+    tugSampleRate.append(samplerate)
+    tugData.append(data)
+    
+    
+def first5000(idx):
+    data = passengerData[idx] # change the dataset
+    plt.figure
+    plt.plot(data[0:5000])
+    plt.title(f"Passenger {passengerList[idx]}")
+    
+    
+    
+first5000(2)
 
 
 
