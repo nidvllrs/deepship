@@ -66,7 +66,7 @@ for boatNum in tugList:
 def plotSigSpec(boatNum,boatType):
     samplerate, data = wavfile.read(f'Project_2/{boatType}/{boatNum}.wav')
     plt.subplot(211)
-    plt.title(f'Spectrogram {boatType} {boatNum}')
+    plt.title(f'Signal and Spectrogram {boatType} {boatNum}')
     plt.plot(data)
     plt.xlabel('Sample')
     plt.ylabel('Amplitude')
@@ -77,8 +77,6 @@ def plotSigSpec(boatNum,boatType):
     plt.ylabel('Frequency')
 
     plt.show()
-
-
 
 def plotISI(boatNum,boatType,plotIdx):
     samplerate, data = wavfile.read(f'Project_2/{boatType}/{boatNum}.wav')
@@ -95,12 +93,23 @@ def plotISI(boatNum,boatType,plotIdx):
 # plotISI(27,"Cargo",312) # front heavy
 # plotISI(69,"Cargo",313) # back heavy ish
 # =============================================================================
+def allPlots(boatNum,boatType):
+    plotISI(boatNum,boatType,111)
+    plotSigSpec(boatNum,boatType)
+    
 
-plotISI(38,"Cargo",111)
-plotSigSpec(38,"Cargo")
+# =============================================================================
+# allPlots(38,"Cargo")
+# =============================================================================
 
+def stats(boatType,boatTypeList):
+    for boatNum in cargoList:
+        samplerate, data = wavfile.read(f'Project_2/{boatType}/{boatNum}.wav')
+        kurt = scipy.stats.kurtosis(data)
+        cv = np.std(data)/np.mean(data)
+        print(f"{kurt} {cv}")
 
-
+stats("Cargo")
 
 
 
